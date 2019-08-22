@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account update Form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <form th:action="@{/home}" method="get">
+                        <button class="btn btn-md btn-primary" name="home"
+                                type="Submit">home
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/logout}" method="get">
+                        <button class="btn btn-md btn-primary" name="registration"
+                                type="Submit">Logout
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span>Update Account</span>
+            </div>
+            <div class="panel-body">
+                <form autocomplete="off" action="#" th:action="@{/accountUpdate}"
+                      th:object="${user}" method="post" class="form-horizontal"
+                      role="form">
+                    <h2>Registration Form</h2>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                   class="validation-message"></label>
+                            <input type="text" th:field="*{name}" placeholder="Name"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                                   class="validation-message"></label>
+                            <input type="text" th:field="*{username}"
+                                   placeholder="User Name" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="text" th:field="*{email}" placeholder="Email"
+                                   class="form-control"/> <label
+                                th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                class="validation-message"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="password" th:field="*{password}"
+                                   placeholder="Password" class="form-control"/> <label
+                                th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                class="validation-message"></label>
+                        </div>
+                    </div>
+                    <div>
+                        <img id="captcha_id" name="imgCaptcha" th:src="@{/images/captcha.jpg}">
+                        <span align="left"><a href="javascript:;"
+                                              title="refresh captcha Image"
+                                              onclick="document.getElementById('captcha_id').src = '/mvc/images/captcha.jpg?' + Math.random();  return false">
+                <img th:src="@{/images/refresh.png}" width="40" height="40"/>
+            </a><input type="text" th:placeholder="captcha" name="captcha" id="captcha" th:field="*{captcha}"
+                       class="form-captcha">
+            </span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <button type="submit" class="btn btn-primary btn-block">update User</button>
+                        </div>
+                    </div>
+
+                    <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
